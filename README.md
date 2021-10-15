@@ -1,6 +1,10 @@
 # My Personal Project
 
-## A subtitle
+## What will the application do?
+
+## Who will use it?
+
+## Why is this project of interest to you?
 
 A *bulleted* list:
 - item 1
