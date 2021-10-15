@@ -51,7 +51,6 @@ public class Collection implements Iterable<Memory> {
     //MODIFIES:
     //EFFECTS:
     public boolean contains(Memory m) {
-
         return coll.contains(m);
     }
 

@@ -56,4 +56,33 @@ class CollectionTest {
          assertEquals(otherMem, collection.findMemoryBasedOnSong("Show Business"));
      }
 
+     @Test
+    public void containsTest() {
+         Memory newMem = new Memory("Cellar Door",
+                 "Angus and Julia Stone");
+         Memory otherMem = new Memory("Show Business",
+                 "A Tribe Called Quest");
+         collection.addMemory(otherMem);
+         collection.addMemory(newMem);
+         assertTrue(collection.contains(newMem));
+
+     }
+
+     @Test
+    public void containsWhenNotContained() {
+         Memory newMem = new Memory("Cellar Door",
+                 "Angus and Julia Stone");
+         Memory otherMem = new Memory("Show Business",
+                 "A Tribe Called Quest");
+         collection.addMemory(otherMem);
+         assertFalse(collection.contains(newMem));
+     }
+
+     @Test
+    public void testGetArtist() {
+         Memory newMem = new Memory("Cellar Door",
+                 "Angus and Julia Stone");
+         assertEquals("Angus and Julia Stone", newMem.getArtist());
+     }
+
 }
