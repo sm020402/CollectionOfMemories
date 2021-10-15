@@ -10,6 +10,7 @@ class CollectionTest {
 
      @BeforeEach
     public void runBefore() {
+
          collection = new Collection();
      }
 
@@ -84,5 +85,4 @@ class CollectionTest {
                  "Angus and Julia Stone");
          assertEquals("Angus and Julia Stone", newMem.getArtist());
      }
-
 }

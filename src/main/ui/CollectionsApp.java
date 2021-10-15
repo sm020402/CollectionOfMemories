@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Scanner;
 
+//this class references code from this repo
+//https://github.students.cs.ubc.ca/CPSC210/TellerApp
+
 public class CollectionsApp {
     private Collection january;
     private Collection february;
@@ -63,11 +66,11 @@ public class CollectionsApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: selection to be one of the given months
+    //EFFECTS: chooses collection to which the following action will be applied
     private Collection selectCollection() {
-        System.out.println("Choose what month you wanna see...");
+        System.out.println("Choose with month you'd like to deal with...");
+        displayMonths();
         String selection = "";
         selection = input.next();
         selection = selection.toLowerCase();
@@ -104,9 +107,25 @@ public class CollectionsApp {
 
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //EFFECTS: displays the possible months that can be chosen as a collection
+    private void displayMonths() {
+        System.out.println("january");
+        System.out.println("february");
+        System.out.println("march");
+        System.out.println("april");
+        System.out.println("may");
+        System.out.println("june");
+        System.out.println("july");
+        System.out.println("august");
+        System.out.println("september");
+        System.out.println("october");
+        System.out.println("november");
+        System.out.println("december");
+    }
+
+
+    //MODIFIES: this
+    //EFFECTS: adds a memory to the chosen collection
     private void doAdd() {
         Collection chosen = selectCollection();
         System.out.println("Ok what's the song name?");
@@ -119,9 +138,9 @@ public class CollectionsApp {
     }
 
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: song chosen to be removed must be in the chosen collection
+    //MODIFIES: this
+    //EFFECTS: removes the given memory from the chosen collection
     private void doRemove() {
         Collection chosen = selectCollection();
         System.out.println("ayo type the name of the song you're booting");
@@ -131,9 +150,7 @@ public class CollectionsApp {
         System.out.println("I gotcha fam");
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //EFFECTS: displays the memories in the chosen collection
     private void doView() {
         Collection chosen = selectCollection();
         for (Memory m : chosen) {
@@ -141,9 +158,8 @@ public class CollectionsApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: selection to be one of the given months
+    //EFFECTS: chooses month
     private Collection chooseMonth(String selection) {
         if (selection.equals("january")) {
             return january;
@@ -157,22 +173,21 @@ public class CollectionsApp {
             return may;
         } else if (selection.equals("june")) {
             return june;
-        } else if (selection.equals("july")) {
-            return july;
-        } else if (selection.equals("august")) {
-            return august;
-        } else if (selection.equals("september")) {
-            return september;
         } else {
             return chooseBetweenLastFewMonths(selection);
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //EFFECTS: allows the selection to choose between months july - december
+    // necessary to avoid making method too long
     private Collection chooseBetweenLastFewMonths(String selection) {
-        if (selection.equals("october")) {
+        if (selection.equals("july")) {
+            return july;
+        } else if (selection.equals("august")) {
+            return august;
+        } else if (selection.equals("september")) {
+            return september;
+        } else if (selection.equals("october")) {
             return october;
         } else if (selection.equals("november")) {
             return november;

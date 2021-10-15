@@ -10,8 +10,8 @@ public class Collection implements Iterable<Memory> {
         coll = new LinkedList<Memory>();
     }
 
-    //MODIFIES:
-    //EFFECTS:
+    //MODIFIES: this
+    //EFFECTS: adds a memory to the collection
     public void addMemory(Memory memory) {
         if (-1 == coll.indexOf(memory)) {
             coll.add(memory);
@@ -26,9 +26,8 @@ public class Collection implements Iterable<Memory> {
         coll.remove(indexOfMem);
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: Song name to be included in one of the memories in the collection
+    //EFFECTS: finds the memory with the given song name
     public Memory findMemoryBasedOnSong(String s) {
         LinkedList<String> collectionSongs = new LinkedList<String>();
         for (Memory m: coll) {
@@ -39,20 +38,22 @@ public class Collection implements Iterable<Memory> {
         return coll.get(indexOfSong);
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+
+    //EFFECTS: returns size of given collection
     public int length() {
 
         return coll.size();
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+
+    //EFFECTS: returns true if given memory is in the collection
     public boolean contains(Memory m) {
         return coll.contains(m);
     }
+
+    //EFFECTS: enables use of for each loop on collection
+    // this method references code from this website:
+    // https://www.javabrahman.com/corejava/implementing-iterable-interface-in-java-to-enable-for-each-loop-based-iteration/
 
     @Override
     public Iterator<Memory> iterator() {
