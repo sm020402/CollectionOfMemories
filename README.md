@@ -18,3 +18,8 @@ Oftentimes I find myself listening to a song and reminiscing about a time in my 
 a lot, or a specific memory where that song was playing. I used to write these things down to keep track of them but it
 seems more convenient to track them in a way like this. 
 
+ User Stories
+- As a user, I want to be able to add memories to collections
+- As a user, I want to be able to remove memories from collections
+- As a user, I want to be able to view the memories in a certain collection
+- As a user, I want to be able to count the number of memories in a collection

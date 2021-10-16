@@ -61,6 +61,8 @@ public class CollectionsApp {
             doRemove();
         } else if (command.equals("v")) {
             doView();
+        } else if (command.equals("c")) {
+            doCount();
         } else {
             System.out.println("Not an option good buddy, try again");
         }
@@ -103,6 +105,7 @@ public class CollectionsApp {
         System.out.println("\ta -> add");
         System.out.println("\tr -> remove");
         System.out.println("\tv -> view");
+        System.out.println("\tc -> count");
         System.out.println("\tq -> quit");
 
     }
@@ -137,6 +140,11 @@ public class CollectionsApp {
         chosen.addMemory(mem);
     }
 
+    //EFFECTS: returns the number of memories in the chosen collection
+    private void doCount() {
+        Collection chosen = selectCollection();
+        System.out.println(chosen.length());
+    }
 
     //REQUIRES: song chosen to be removed must be in the chosen collection
     //MODIFIES: this
