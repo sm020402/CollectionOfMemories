@@ -23,3 +23,5 @@ seems more convenient to track them in a way like this.
 - As a user, I want to be able to remove memories from collections
 - As a user, I want to be able to view the memories in a certain collection
 - As a user, I want to be able to count the number of memories in a collection
+- As a user, I want to be able to save my collections to file
+- As a user, I want to be able to load my collections from file

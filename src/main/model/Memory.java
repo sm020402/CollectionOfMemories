@@ -2,7 +2,10 @@ package model;
 
 //Represents a song described by its song name and artist
 
-public class Memory {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Memory implements Writable {
     private String songName;
     private String artist;
 
@@ -19,6 +22,14 @@ public class Memory {
     //EFFECTS: returns artist
     public String getArtist() {
         return artist;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", songName);
+        json.put("artist", artist);
+        return json;
     }
 
 }

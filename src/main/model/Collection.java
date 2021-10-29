@@ -1,12 +1,18 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Collection implements Iterable<Memory> {
+public class Collection implements Iterable<Memory>, Writable {
+    private String name;
     private LinkedList<Memory> coll;
 
-    public Collection() {
+    public Collection(String name) {
+        this.name = name;
         coll = new LinkedList<Memory>();
     }
 
@@ -57,6 +63,24 @@ public class Collection implements Iterable<Memory> {
 
     @Override
     public Iterator<Memory> iterator() {
+
         return coll.iterator();
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("month", name);
+        json.put("memories", memoriesToJson());
+        return json;
+    }
+
+    private JSONArray memoriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Memory m : coll) {
+            jsonArray.put(m.toJson());
+        }
+        return jsonArray;
+    }
+
 }

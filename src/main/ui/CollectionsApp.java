@@ -2,7 +2,11 @@ package ui;
 
 import model.Collection;
 import model.Memory;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,7 +15,6 @@ import java.util.Scanner;
 //https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 public class CollectionsApp {
-    private Collection january;
     private Collection february;
     private Collection march;
     private Collection april;
@@ -24,9 +27,18 @@ public class CollectionsApp {
     private Collection november;
     private Collection december;
     private Scanner input;
+    private static final String JSON_STORE = "/data/myFile.json.txt";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private Collection january;
+
 
     //EFFECTS: runs the collections application
-    public CollectionsApp() {
+    public CollectionsApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        january = new Collection("january");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runCollections();
     }
 
@@ -63,6 +75,10 @@ public class CollectionsApp {
             doView();
         } else if (command.equals("c")) {
             doCount();
+        } else if (command.equals("s")) {
+            saveCollections();
+        } else if (command.equals("l")) {
+            loadCollections();
         } else {
             System.out.println("Not an option good buddy, try again");
         }
@@ -82,18 +98,17 @@ public class CollectionsApp {
     //MODIFIES: this
     //EFFECTS: initializes collections
     private void initialize() {
-        january = new Collection();
-        february = new Collection();
-        march = new Collection();
-        april = new Collection();
-        may = new Collection();
-        june = new Collection();
-        july = new Collection();
-        august = new Collection();
-        september = new Collection();
-        october = new Collection();
-        november = new Collection();
-        december = new Collection();
+        february = new Collection("february");
+        march = new Collection("march");
+        april = new Collection("april");
+        may = new Collection("may");
+        june = new Collection("june");
+        july = new Collection("july");
+        august = new Collection("august");
+        september = new Collection("september");
+        october = new Collection("october");
+        november = new Collection("november");
+        december = new Collection("december");
         input = new Scanner(System.in);
         input.useDelimiter("\n");
 
@@ -106,6 +121,8 @@ public class CollectionsApp {
         System.out.println("\tr -> remove");
         System.out.println("\tv -> view");
         System.out.println("\tc -> count");
+        System.out.println("\ts -> save collections to file");
+        System.out.println("\tl -> load collections from file");
         System.out.println("\tq -> quit");
 
     }
@@ -202,5 +219,28 @@ public class CollectionsApp {
         } else {
             return december;
         }
+    }
+
+
+
+    private void saveCollections() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(january);
+            jsonWriter.close();
+            System.out.println("Saved collections");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save");
+        }
+    }
+
+    private void loadCollections() {
+        try {
+            january = jsonReader.read();
+            System.out.println("Loaded");
+        } catch (IOException e) {
+            System.out.println("Unable to load");
+        }
+
     }
 }

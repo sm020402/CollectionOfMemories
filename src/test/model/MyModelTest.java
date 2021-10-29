@@ -11,7 +11,7 @@ class CollectionTest {
      @BeforeEach
     public void runBefore() {
 
-         collection = new Collection();
+         collection = new Collection("collectionTest");
      }
 
      @Test
