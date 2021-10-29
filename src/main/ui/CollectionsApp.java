@@ -15,7 +15,7 @@ import java.util.Scanner;
 //https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 public class CollectionsApp {
-    private static final String JSON_STORE = "/data/myFile.json.txt";
+    private static final String JSON_STORE = "./data/myFile.json";
     private Scanner input;
     private Collection january;
     private JsonWriter jsonWriter;
