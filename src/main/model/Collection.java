@@ -4,8 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Collection implements Iterable<Memory>, Writable {
     private String name;
@@ -14,6 +16,14 @@ public class Collection implements Iterable<Memory>, Writable {
     public Collection(String name) {
         this.name = name;
         coll = new LinkedList<Memory>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Memory> getMemories() {
+        return Collections.unmodifiableList(coll);
     }
 
     //MODIFIES: this

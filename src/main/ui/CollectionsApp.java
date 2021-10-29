@@ -15,22 +15,12 @@ import java.util.Scanner;
 //https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 public class CollectionsApp {
-    private Collection february;
-    private Collection march;
-    private Collection april;
-    private Collection may;
-    private Collection june;
-    private Collection july;
-    private Collection august;
-    private Collection september;
-    private Collection october;
-    private Collection november;
-    private Collection december;
-    private Scanner input;
     private static final String JSON_STORE = "/data/myFile.json.txt";
+    private Scanner input;
+    private Collection january;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private Collection january;
+
 
 
     //EFFECTS: runs the collections application
@@ -47,6 +37,7 @@ public class CollectionsApp {
     private void runCollections() {
         boolean cont = true;
         String command = null;
+        input = new Scanner(System.in);
 
         initialize();
 
@@ -84,31 +75,20 @@ public class CollectionsApp {
         }
     }
 
-    //REQUIRES: selection to be one of the given months
-    //EFFECTS: chooses collection to which the following action will be applied
-    private Collection selectCollection() {
-        System.out.println("Choose with month you'd like to deal with...");
-        displayMonths();
-        String selection = "";
-        selection = input.next();
-        selection = selection.toLowerCase();
-        return chooseMonth(selection);
-    }
+//    //REQUIRES: selection to be one of the given months
+//    //EFFECTS: chooses collection to which the following action will be applied
+//    private Collection selectCollection() {
+//        System.out.println("Choose with month you'd like to deal with...");
+//        displayMonths();
+//        String selection = "";
+//        selection = input.next();
+//        selection = selection.toLowerCase();
+//        return chooseMonth(selection);
+//    }
 
     //MODIFIES: this
     //EFFECTS: initializes collections
     private void initialize() {
-        february = new Collection("february");
-        march = new Collection("march");
-        april = new Collection("april");
-        may = new Collection("may");
-        june = new Collection("june");
-        july = new Collection("july");
-        august = new Collection("august");
-        september = new Collection("september");
-        october = new Collection("october");
-        november = new Collection("november");
-        december = new Collection("december");
         input = new Scanner(System.in);
         input.useDelimiter("\n");
 
@@ -127,99 +107,95 @@ public class CollectionsApp {
 
     }
 
-    //EFFECTS: displays the possible months that can be chosen as a collection
-    private void displayMonths() {
-        System.out.println("january");
-        System.out.println("february");
-        System.out.println("march");
-        System.out.println("april");
-        System.out.println("may");
-        System.out.println("june");
-        System.out.println("july");
-        System.out.println("august");
-        System.out.println("september");
-        System.out.println("october");
-        System.out.println("november");
-        System.out.println("december");
-    }
+//    //EFFECTS: displays the possible months that can be chosen as a collection
+//    private void displayMonths() {
+//        System.out.println("january");
+//        System.out.println("february");
+//        System.out.println("march");
+//        System.out.println("april");
+//        System.out.println("may");
+//        System.out.println("june");
+//        System.out.println("july");
+//        System.out.println("august");
+//        System.out.println("september");
+//        System.out.println("october");
+//        System.out.println("november");
+//        System.out.println("december");
+//    }
 
 
     //MODIFIES: this
     //EFFECTS: adds a memory to the chosen collection
     private void doAdd() {
-        Collection chosen = selectCollection();
         System.out.println("Ok what's the song name?");
         String songName = input.next();
         System.out.println("By who???");
         String artistName = input.next();
         System.out.println("dope");
         Memory mem = new Memory(songName, artistName);
-        chosen.addMemory(mem);
+        january.addMemory(mem);
     }
 
     //EFFECTS: returns the number of memories in the chosen collection
     private void doCount() {
-        Collection chosen = selectCollection();
-        System.out.println(chosen.length());
+        System.out.println(january.length());
     }
 
     //REQUIRES: song chosen to be removed must be in the chosen collection
     //MODIFIES: this
     //EFFECTS: removes the given memory from the chosen collection
     private void doRemove() {
-        Collection chosen = selectCollection();
         System.out.println("ayo type the name of the song you're booting");
         String songName = input.next();
-        Memory mem = chosen.findMemoryBasedOnSong(songName);
-        chosen.removeMemory(mem);
+        Memory mem = january.findMemoryBasedOnSong(songName);
+        january.removeMemory(mem);
         System.out.println("I gotcha fam");
     }
 
     //EFFECTS: displays the memories in the chosen collection
     private void doView() {
-        Collection chosen = selectCollection();
-        for (Memory m : chosen) {
+        for (Memory m : january) {
             System.out.println(m.getSongName() + " - " + m.getArtist());
         }
     }
 
     //REQUIRES: selection to be one of the given months
     //EFFECTS: chooses month
-    private Collection chooseMonth(String selection) {
-        if (selection.equals("january")) {
-            return january;
-        } else if (selection.equals("february")) {
-            return february;
-        } else if (selection.equals("march")) {
-            return march;
-        } else if (selection.equals("april")) {
-            return april;
-        } else if (selection.equals("may")) {
-            return may;
-        } else if (selection.equals("june")) {
-            return june;
-        } else {
-            return chooseBetweenLastFewMonths(selection);
-        }
-    }
-
-    //EFFECTS: allows the selection to choose between months july - december
-    // necessary to avoid making method too long
-    private Collection chooseBetweenLastFewMonths(String selection) {
-        if (selection.equals("july")) {
-            return july;
-        } else if (selection.equals("august")) {
-            return august;
-        } else if (selection.equals("september")) {
-            return september;
-        } else if (selection.equals("october")) {
-            return october;
-        } else if (selection.equals("november")) {
-            return november;
-        } else {
-            return december;
-        }
-    }
+//    private Collection chooseMonth(String selection) {
+//        if (selection.equals("january")) {
+//            return january;
+//        } else if (selection.equals("february")) {
+//            return february;
+//        } else if (selection.equals("march")) {
+//            return march;
+//        } else if (selection.equals("april")) {
+//            return april;
+//        } else if (selection.equals("may")) {
+//            return may;
+//        } else if (selection.equals("june")) {
+//            return june;
+//        } else {
+//            return chooseBetweenLastFewMonths(selection);
+//        }
+//    }
+//
+//    //EFFECTS: allows the selection to choose between months july - december
+//    // necessary to avoid making method too long
+//    private Collection chooseBetweenLastFewMonths(String selection) {
+//        if (selection.equals("july")) {
+//            return july;
+//        } else if (selection.equals("august")) {
+//            return august;
+//        } else if (selection.equals("september")) {
+//            return september;
+//        } else if (selection.equals("october")) {
+//            return october;
+//        } else if (selection.equals("november")) {
+//            return november;
+//        } else {
+//            return december;
+//        }
+//    }
 
 
 
