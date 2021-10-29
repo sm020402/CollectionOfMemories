@@ -73,7 +73,6 @@ public class Collection implements Iterable<Memory>, Writable {
 
     @Override
     public Iterator<Memory> iterator() {
-
         return coll.iterator();
     }
 
@@ -85,6 +84,7 @@ public class Collection implements Iterable<Memory>, Writable {
         return json;
     }
 
+    //EFFECTS: returns memories in collection as JSON array
     private JSONArray memoriesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Memory m : coll) {

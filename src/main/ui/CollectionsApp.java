@@ -14,6 +14,10 @@ import java.util.Scanner;
 //this class references code from this repo
 //https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
+//this class references code from this repo
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
+
 public class CollectionsApp {
     private static final String JSON_STORE = "./data/myFile.json";
     private Scanner input;
