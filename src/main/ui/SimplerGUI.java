@@ -5,7 +5,7 @@ import model.Collection;
 import model.Memory;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -16,13 +16,29 @@ import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
+
+//this class references code from
+//https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/TreeDemoProject/src/components/TreeDemo.java
+
+//this class references code from
+//https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+
+//this class references code from
+//https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/TextFieldDemoProject/src/components/TextFieldDemo.java
+
+
 
 public class SimplerGUI extends JFrame {
 
     private static boolean useSystemLookAndFeel = false;
 
+
+    //EFFECTS:
     public static class MonthsTree extends JPanel implements TreeSelectionListener {
 
         private Collection january = new Collection("january");
@@ -37,9 +53,10 @@ public class SimplerGUI extends JFrame {
         private static final String loadString = "Load";
         private JTextField songName;
 
+        //EFFECTS: creates JPane displaying the list of songs
         public MonthsTree() {
             super(new GridLayout(1, 0));
-            DefaultMutableTreeNode month = new DefaultMutableTreeNode("January");
+            DefaultMutableTreeNode month = new DefaultMutableTreeNode("Current Songs");
             title.add(month);
             tree = new JTree(title);
             tree.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -56,6 +73,7 @@ public class SimplerGUI extends JFrame {
             add(splitPane);
         }
 
+        //EFFECTS: creates the button allowing users to add songs
         public JButton addButton() {
             JButton addButton = new JButton(addString);
             SimplerGUI.MonthsTree.AddListener addListener = new SimplerGUI.MonthsTree.AddListener(addButton);
@@ -70,6 +88,7 @@ public class SimplerGUI extends JFrame {
             return addButton;
         }
 
+        //EFFECTS: creates the panel of buttons
         public JPanel buttonPane() {
             JButton saveButton = new JButton(saveString);
             saveButton.setActionCommand(saveString);
@@ -93,19 +112,24 @@ public class SimplerGUI extends JFrame {
             return buttonPane;
         }
 
+        //EFFECTS:
         @Override
         public void valueChanged(TreeSelectionEvent e) {
 
         }
 
+
         private class AddListener implements ActionListener, DocumentListener, TreeSelectionListener {
             private boolean alreadyEnabled = false;
             private JButton button;
 
+
+            //EFFECTS: adds a listener for the add button
             private AddListener(JButton button) {
                 this.button = button;
             }
 
+            //EFFECTS: saves input as memory and adds it into the tree
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
@@ -119,16 +143,19 @@ public class SimplerGUI extends JFrame {
 
 
 
+            //EFFECTS: enables the button
             @Override
             public void insertUpdate(DocumentEvent e) {
                 enableButton();
             }
 
+            //EFFECTS: handles the text entered into the add text box
             @Override
             public void removeUpdate(DocumentEvent e) {
                 handleEmptyTextField(e);
             }
 
+            //EFFECTS: if text field is empty, button is disabled
             @Override
             public void changedUpdate(DocumentEvent e) {
                 if (!handleEmptyTextField(e)) {
@@ -137,12 +164,16 @@ public class SimplerGUI extends JFrame {
 
             }
 
+            //EFFECTS: enables the button
+            //MODIFIES: button
             private void enableButton() {
                 if (!alreadyEnabled) {
                     button.setEnabled(true);
                 }
             }
 
+            //EFFECTS: If the text field is empty, button is disabled
+            //MODIFIES: button
             private boolean handleEmptyTextField(DocumentEvent e) {
                 if (e.getDocument().getLength() <= 0) {
                     button.setEnabled(false);
@@ -152,22 +183,16 @@ public class SimplerGUI extends JFrame {
                 return false;
             }
 
+            //EFFECTS: creates a popup displaying an error message
             public Popup errorPop() {
                 JFrame f = new JFrame("error");
-
                 JLabel l = new JLabel("error");
-
                 f.setSize(100, 100);
                 PopupFactory pf = new PopupFactory();
-
                 JPanel p1 = new JPanel();
-
                 p1.setBackground(Color.blue);
-
                 p1.add(l);
-
                 Popup p = pf.getPopup(f, p1, 180, 100);
-
                 return p;
             }
 
@@ -181,6 +206,8 @@ public class SimplerGUI extends JFrame {
             private boolean alreadyEnabled = false;
             private JButton button;
 
+            private static final String IMAGE = "C:\\Users\\shalo\\project_b7a8k\\src\\resources\\images\\IMG_8680.JPG";
+
             private static final String JSON_STORE = "./data/data/januarymonth.json";
 
             private JsonWriter janWriter =  new JsonWriter(JSON_STORE);
@@ -190,23 +217,45 @@ public class SimplerGUI extends JFrame {
                 this.button = button;
             }
 
+            //EFFECTS: If save button is clicked, current state is saved
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveJanuary();
 
             }
 
+            //EFFECTS: saves the memory into the json file
+            //MODIFIES: januarymonth.json
             private void saveJanuary() {
                 try {
                     janWriter.open();
                     janWriter.write(january);
                     janWriter.close();
+                    savedPop();
                 } catch (FileNotFoundException e) {
                     errorPop().show();
                 }
 
             }
 
+            //EFFECTS: creates a popup displaying a message for when the data is saved succesfully
+            public void savedPop() {
+                try {
+                    JDialog dialog = new JDialog();
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    dialog.setTitle("Saved");
+                    dialog.add(new JLabel(new ImageIcon(ImageIO.read(this.getClass().getResource(IMAGE)))));
+
+                    dialog.pack();
+                    dialog.setVisible(true);
+
+                } catch (IOException ioe) {
+                    System.out.println("couldn't load the pic");
+                }
+
+            }
+
+            //EFFECTS: creates popup displaying error message
             public Popup errorPop() {
                 JFrame f = new JFrame("error");
                 JLabel l = new JLabel("error");
@@ -227,12 +276,15 @@ public class SimplerGUI extends JFrame {
             private static final String JSON_STORE = "./data/data/januarymonth.json";
             private JsonReader janReader =  new JsonReader(JSON_STORE);
 
+            //EFFECTS: if load button is clicked, load data onto application
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadJanuary();
 
             }
 
+            // EFFECTS: loads the memory from the json file and adds all the memories into a tree in a new popup
+            //MODIFIES: january, tree
             private void loadJanuary() {
                 try {
                     january = janReader.read();
@@ -251,12 +303,10 @@ public class SimplerGUI extends JFrame {
 
             }
 
+            //EFFECTS: creates popup displaying the songs added in previous sessions
             public JDialog previousPop(JTree t) {
 
-                JFrame f = new JFrame("Previously Added");
                 JLabel l = new JLabel("Previously Added");
-                f.setSize(300, 300);
-
                 JPanel p1 = new JPanel();
                 p1.setBackground(Color.blue);
                 p1.add(l);
@@ -267,6 +317,7 @@ public class SimplerGUI extends JFrame {
                 return p;
             }
 
+            //EFFECTS: creates popup displaying error message
             public Popup errorPop() {
                 JFrame f = new JFrame("error");
                 JLabel l = new JLabel("error");
