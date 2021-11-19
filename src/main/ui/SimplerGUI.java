@@ -83,6 +83,7 @@ public class SimplerGUI extends JFrame {
             addButton.setEnabled(false);
 
             songName = new JTextField(30);
+            songName.setFont(new Font("Arial", Font.PLAIN, 25));
             songName.addActionListener(addListener);
             songName.getDocument().addDocumentListener(addListener);
             return addButton;
@@ -206,7 +207,7 @@ public class SimplerGUI extends JFrame {
             private boolean alreadyEnabled = false;
             private JButton button;
 
-            private static final String IMAGE = "C:\\Users\\shalo\\project_b7a8k\\src\\resources\\images\\IMG_8680.JPG";
+            private static final String IMAGE = "./data/images/pic.JPG";
 
             private static final String JSON_STORE = "./data/data/januarymonth.json";
 
@@ -231,7 +232,7 @@ public class SimplerGUI extends JFrame {
                     janWriter.open();
                     janWriter.write(january);
                     janWriter.close();
-                    savedPop();
+                    savedPop().setVisible(true);
                 } catch (FileNotFoundException e) {
                     errorPop().show();
                 }
@@ -239,20 +240,14 @@ public class SimplerGUI extends JFrame {
             }
 
             //EFFECTS: creates a popup displaying a message for when the data is saved succesfully
-            public void savedPop() {
-                try {
-                    JDialog dialog = new JDialog();
-                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                    dialog.setTitle("Saved");
-                    dialog.add(new JLabel(new ImageIcon(ImageIO.read(this.getClass().getResource(IMAGE)))));
-
-                    dialog.pack();
-                    dialog.setVisible(true);
-
-                } catch (IOException ioe) {
-                    System.out.println("couldn't load the pic");
-                }
-
+            public JDialog savedPop() {
+                JPanel p1 = new JPanel();
+                ImageIcon i = new ImageIcon(IMAGE);
+                p1.add(new JLabel(i));
+                JDialog p = new JDialog();
+                p.add(p1);
+                p.setMinimumSize(new Dimension(900, 1500));
+                return p;
             }
 
             //EFFECTS: creates popup displaying error message
@@ -262,7 +257,6 @@ public class SimplerGUI extends JFrame {
                 f.setSize(100, 100);
                 PopupFactory pf = new PopupFactory();
                 JPanel p1 = new JPanel();
-                p1.setBackground(Color.blue);
                 p1.add(l);
                 Popup p = pf.getPopup(f, p1, 180, 100);
                 return p;
@@ -272,6 +266,7 @@ public class SimplerGUI extends JFrame {
 
 
         public class LoadListener implements ActionListener {
+            private static final String IMAGE = "./data/images/image.jpg";
 
             private static final String JSON_STORE = "./data/data/januarymonth.json";
             private JsonReader janReader =  new JsonReader(JSON_STORE);
@@ -290,6 +285,7 @@ public class SimplerGUI extends JFrame {
                     january = janReader.read();
                     System.out.println("Loaded");
                     DefaultMutableTreeNode previous = new DefaultMutableTreeNode("Previously Added");
+
                     tree = new JTree(previous);
                     for (Memory m :january) {
                         previous.add(new DefaultMutableTreeNode(m.getSongName()));
@@ -305,15 +301,16 @@ public class SimplerGUI extends JFrame {
 
             //EFFECTS: creates popup displaying the songs added in previous sessions
             public JDialog previousPop(JTree t) {
-
+                t.setFont(new Font("Arial", Font.PLAIN, 25));
                 JLabel l = new JLabel("Previously Added");
                 JPanel p1 = new JPanel();
-                p1.setBackground(Color.blue);
-                p1.add(l);
+                ImageIcon i = new ImageIcon(IMAGE);
+                p1.add(new JLabel(i));
                 JScrollPane sp = new JScrollPane(t);
                 p1.add(sp);
                 JDialog p = new JDialog();
                 p.add(p1);
+                p.setMinimumSize(new Dimension(200, 200));
                 return p;
             }
 
