@@ -44,7 +44,7 @@ public class SimplerGUI extends JFrame {
         private Collection january = new Collection("january");
 
         private JEditorPane pane;
-        DefaultMutableTreeNode title = new DefaultMutableTreeNode("Months");
+        DefaultMutableTreeNode title = new DefaultMutableTreeNode("Songs");
         private JTree tree;
         private boolean playWithLineStyle = false;
         private String lineStyle = "Horizontal";
@@ -310,7 +310,7 @@ public class SimplerGUI extends JFrame {
                 p1.add(sp);
                 JDialog p = new JDialog();
                 p.add(p1);
-                p.setMinimumSize(new Dimension(200, 200));
+                p.setMinimumSize(new Dimension(1000, 700));
                 return p;
             }
 
@@ -332,6 +332,7 @@ public class SimplerGUI extends JFrame {
     }
 
 
+    //EFFECTS: creates the GUI
     private static void createAndShowGUI() {
         if (useSystemLookAndFeel) {
             try {
