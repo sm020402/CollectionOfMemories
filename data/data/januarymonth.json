@@ -1,4 +1,10 @@
 {
     "month": "january",
-    "memories": []
+    "memories": [
+        {"name": "a"},
+        {"name": "b"},
+        {"name": "c"},
+        {"name": "d"},
+        {"name": "g"}
+    ]
 }
