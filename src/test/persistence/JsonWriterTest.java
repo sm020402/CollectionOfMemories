@@ -48,8 +48,8 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralCollection() {
         try {
             Collection c = new Collection("collection2");
-            c.addMemory(new Memory("a", "b"));
-            c.addMemory(new Memory("c", "d"));
+            c.addMemory(new Memory("a"));
+            c.addMemory(new Memory("c"));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralCollection.json");
             writer.open();
             writer.write(c);
@@ -60,8 +60,8 @@ public class JsonWriterTest extends JsonTest {
             assertEquals("collection2", c.getName());
             List<Memory> mems = c.getMemories();
             assertEquals(2, mems.size());
-            checkMemory("a", "b", mems.get(0));
-            checkMemory("c", "d", mems.get(1));
+            checkMemory("a", mems.get(0));
+            checkMemory("c",  mems.get(1));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

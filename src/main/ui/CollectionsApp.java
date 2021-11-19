@@ -136,7 +136,7 @@ public class CollectionsApp {
         System.out.println("By who???");
         String artistName = input.next();
         System.out.println("dope");
-        Memory mem = new Memory(songName, artistName);
+        Memory mem = new Memory(songName);
         january.addMemory(mem);
     }
 
@@ -159,7 +159,7 @@ public class CollectionsApp {
     //EFFECTS: displays the memories in the chosen collection
     private void doView() {
         for (Memory m : january) {
-            System.out.println(m.getSongName() + " - " + m.getArtist());
+            System.out.println(m.getSongName());
         }
     }
 

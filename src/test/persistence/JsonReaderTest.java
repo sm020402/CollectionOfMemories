@@ -46,8 +46,8 @@ public class JsonReaderTest extends JsonTest {
             assertEquals("collection2", c.getName());
             List<Memory> mems = c.getMemories();
             assertEquals(2, mems.size());
-            checkMemory("a", "b", mems.get(0));
-            checkMemory("c", "d", mems.get(1));
+            checkMemory("a",  mems.get(0));
+            checkMemory("c",  mems.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

@@ -7,11 +7,11 @@ import persistence.Writable;
 
 public class Memory implements Writable {
     private String songName;
-    private String artist;
+//    private String artist;
 
-    public Memory(String songName, String artist) {
+    public Memory(String songName) {
         this.songName = songName;
-        this.artist = artist;
+//        this.artist = artist;
     }
 
     //EFFECTS: returns song name
@@ -19,16 +19,16 @@ public class Memory implements Writable {
         return songName;
     }
 
-    //EFFECTS: returns artist
-    public String getArtist() {
-        return artist;
-    }
+//    //EFFECTS: returns artist
+//    public String getArtist() {
+//        return artist;
+//    }
 
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", songName);
-        json.put("artist", artist);
+//        json.put("artist", artist);
         return json;
     }
 

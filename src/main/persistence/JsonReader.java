@@ -63,8 +63,7 @@ public class JsonReader {
     //EFFECTS: parses memory from JSON object and adds it to collection
     private void addMemory(Collection c, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        String artist = jsonObject.getString("artist");
-        Memory m = new Memory(name, artist);
+        Memory m = new Memory(name);
         c.addMemory(m);
 
     }

@@ -12,6 +12,7 @@ import java.util.List;
 public class Collection implements Iterable<Memory>, Writable {
     private String name;
     private LinkedList<Memory> coll;
+    private LinkedList<Collection> collections;
 
     public Collection(String name) {
         this.name = name;
@@ -42,6 +43,7 @@ public class Collection implements Iterable<Memory>, Writable {
         coll.remove(indexOfMem);
     }
 
+
     //REQUIRES: Song name to be included in one of the memories in the collection
     //EFFECTS: finds the memory with the given song name
     public Memory findMemoryBasedOnSong(String s) {
@@ -53,6 +55,16 @@ public class Collection implements Iterable<Memory>, Writable {
         int indexOfSong = collectionSongs.indexOf(s);
         return coll.get(indexOfSong);
     }
+
+    public Collection findCollectionBasedOnString(String s) {
+        LinkedList<String> collectionNames = new LinkedList<>();
+        for (Collection c : collections) {
+            collectionNames.add(c.getName());
+        }
+        int indexOfColl = collectionNames.indexOf(s);
+        return collections.get(indexOfColl);
+    }
+
 
 
     //EFFECTS: returns size of given collection
