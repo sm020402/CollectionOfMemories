@@ -56,14 +56,6 @@ public class Collection implements Iterable<Memory>, Writable {
         return coll.get(indexOfSong);
     }
 
-    public Collection findCollectionBasedOnString(String s) {
-        LinkedList<String> collectionNames = new LinkedList<>();
-        for (Collection c : collections) {
-            collectionNames.add(c.getName());
-        }
-        int indexOfColl = collectionNames.indexOf(s);
-        return collections.get(indexOfColl);
-    }
 
 
 
