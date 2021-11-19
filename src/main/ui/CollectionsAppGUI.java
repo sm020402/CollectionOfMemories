@@ -1,6 +1,5 @@
 package ui;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import model.Collection;
 import model.Memory;
 import persistence.JsonReader;

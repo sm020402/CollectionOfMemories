@@ -1,6 +1,6 @@
 package ui;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
+
 import model.Collection;
 import model.Memory;
 import persistence.JsonReader;
@@ -11,7 +11,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.text.DefaultTextUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
