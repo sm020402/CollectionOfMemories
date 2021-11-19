@@ -5,7 +5,7 @@ This application will be used to organize groups of songs based on when the user
 or based on a time when that song had prominence. 
 
 Specifically, it will allow users to:
-- Create a "memory" based on the song name and artist
+- Create a "memory" based on the song name
 - Add memories to collections organized by month
 - Remove memories from collections
 - View the memories contained in the collections
