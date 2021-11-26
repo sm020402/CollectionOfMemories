@@ -1,6 +1,8 @@
 package persistence;
 
 import model.Collection;
+import model.Event;
+import model.EventLog;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -32,6 +34,7 @@ public class JsonWriter {
     public void write(Collection c) {
         JSONObject json = c.toJson();
         saveToFile(json.toString(TAB));
+        EventLog.getInstance().logEvent(new Event("Collection loaded"));
     }
 
     //MODIFIES: this

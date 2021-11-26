@@ -2,6 +2,8 @@ package ui;
 
 
 import model.Collection;
+import model.Event;
+import model.EventLog;
 import model.Memory;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -36,12 +38,12 @@ import java.util.Objects;
 public class SimplerGUI extends JFrame {
 
     private static boolean useSystemLookAndFeel = false;
+    private static Collection january = new Collection("january");
 
 
     //EFFECTS:
     public static class MonthsTree extends JPanel implements TreeSelectionListener {
 
-        private Collection january = new Collection("january");
 
         private JEditorPane pane;
         DefaultMutableTreeNode title = new DefaultMutableTreeNode("Songs");
@@ -116,6 +118,7 @@ public class SimplerGUI extends JFrame {
         //EFFECTS:
         @Override
         public void valueChanged(TreeSelectionEvent e) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 
         }
 
@@ -203,7 +206,7 @@ public class SimplerGUI extends JFrame {
             }
         }
 
-        public class SaveListener implements ActionListener {
+        private class SaveListener implements ActionListener {
             private boolean alreadyEnabled = false;
             private JButton button;
 
@@ -265,7 +268,7 @@ public class SimplerGUI extends JFrame {
 
 
 
-        public class LoadListener implements ActionListener {
+        private class LoadListener implements ActionListener {
             private static final String IMAGE = "./data/images/image.jpg";
 
             private static final String JSON_STORE = "./data/data/januarymonth.json";
@@ -342,7 +345,16 @@ public class SimplerGUI extends JFrame {
             }
         }
         JFrame frame = new JFrame("Months Tree");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                for (Event e : EventLog.getInstance()) {
+                    System.out.println(e.toString());
+                }
+                System.exit(0);
+            }
+        });
 
         frame.add(new SimplerGUI.MonthsTree());
 

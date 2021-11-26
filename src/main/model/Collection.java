@@ -4,19 +4,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Collection implements Iterable<Memory>, Writable {
+    private List<Event> events;
     private String name;
     private LinkedList<Memory> coll;
-    private LinkedList<Collection> collections;
 
     public Collection(String name) {
         this.name = name;
         coll = new LinkedList<Memory>();
+        this.events = new ArrayList<>();
     }
 
     public String getName() {
@@ -32,6 +30,7 @@ public class Collection implements Iterable<Memory>, Writable {
     public void addMemory(Memory memory) {
         if (-1 == coll.indexOf(memory)) {
             coll.add(memory);
+            EventLog.getInstance().logEvent(new Event("Memory added to Collection."));
         }
     }
 
@@ -41,6 +40,7 @@ public class Collection implements Iterable<Memory>, Writable {
     public void removeMemory(Memory memory) {
         int indexOfMem = coll.indexOf(memory);
         coll.remove(indexOfMem);
+        EventLog.getInstance().logEvent(new Event("Memory removed from Collection"));
     }
 
 
@@ -85,6 +85,7 @@ public class Collection implements Iterable<Memory>, Writable {
         JSONObject json = new JSONObject();
         json.put("month", name);
         json.put("memories", memoriesToJson());
+        EventLog.getInstance().logEvent(new Event("Collection saved"));
         return json;
     }
 
