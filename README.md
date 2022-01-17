@@ -3,6 +3,7 @@
 ## What will the application do?
 This application will be used to organize groups of songs based on when the user was listening to them most,
 or based on a time when that song had prominence. 
+Check out the "BetterGUI" for the most recently updated version of this application.
 
 Specifically, it will allow users to:
 - Create a "memory" based on the song name
