@@ -142,7 +142,7 @@ public class SimplerGUI extends JFrame {
 
                 songName.requestFocusInWindow();
                 songName.setText("");
-                january.addMemory(new Memory(name));
+                january.addMemory(new Memory(name, ""));
             }
 
 

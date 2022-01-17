@@ -18,15 +18,15 @@ class CollectionTest {
 
      @Test
     public void testAdd() {
-         Memory newMem = new Memory("Cellar Door");
+         Memory newMem = new Memory("Cellar Door", "");
          collection.addMemory(newMem);
          assertEquals(1, collection.length());
      }
 
      @Test
     public void testAddWhenAlreadyPresent() {
-         Memory newMem = new Memory("Cellar Door");
-         Memory otherMem = new Memory("Show Business");
+         Memory newMem = new Memory("Cellar Door", "");
+         Memory otherMem = new Memory("Show Business", "");
          collection.addMemory(otherMem);
          collection.addMemory(newMem);
          collection.addMemory(newMem);
@@ -35,8 +35,8 @@ class CollectionTest {
 
      @Test
     public void removesProperly() {
-         Memory newMem = new Memory("Cellar Door");
-         Memory otherMem = new Memory("Show Business");
+         Memory newMem = new Memory("Cellar Door", "");
+         Memory otherMem = new Memory("Show Business", "");
          collection.addMemory(otherMem);
          collection.addMemory(newMem);
          collection.removeMemory(newMem);
@@ -45,8 +45,8 @@ class CollectionTest {
 
      @Test
     public void findMemory() {
-         Memory newMem = new Memory("Cellar Door");
-         Memory otherMem = new Memory("Show Business");
+         Memory newMem = new Memory("Cellar Door", "");
+         Memory otherMem = new Memory("Show Business", "");
          collection.addMemory(otherMem);
          collection.addMemory(newMem);
          assertEquals(otherMem, collection.findMemoryBasedOnSong("Show Business"));
@@ -54,8 +54,8 @@ class CollectionTest {
 
      @Test
     public void containsTest() {
-         Memory newMem = new Memory("Cellar Door");
-         Memory otherMem = new Memory("Show Business");
+         Memory newMem = new Memory("Cellar Door", "");
+         Memory otherMem = new Memory("Show Business", "");
          collection.addMemory(otherMem);
          collection.addMemory(newMem);
          assertTrue(collection.contains(newMem));
@@ -64,8 +64,8 @@ class CollectionTest {
 
      @Test
     public void containsWhenNotContained() {
-         Memory newMem = new Memory("Cellar Door");
-         Memory otherMem = new Memory("Show Business");
+         Memory newMem = new Memory("Cellar Door", "");
+         Memory otherMem = new Memory("Show Business", "");
          collection.addMemory(otherMem);
          assertFalse(collection.contains(newMem));
      }

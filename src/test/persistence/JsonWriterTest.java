@@ -48,8 +48,8 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralCollection() {
         try {
             Collection c = new Collection("collection2");
-            c.addMemory(new Memory("a"));
-            c.addMemory(new Memory("c"));
+            c.addMemory(new Memory("a", ""));
+            c.addMemory(new Memory("c", ""));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralCollection.json");
             writer.open();
             writer.write(c);

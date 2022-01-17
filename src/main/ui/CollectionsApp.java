@@ -136,7 +136,7 @@ public class CollectionsApp {
         System.out.println("By who???");
         String artistName = input.next();
         System.out.println("dope");
-        Memory mem = new Memory(songName);
+        Memory mem = new Memory(songName, "");
         january.addMemory(mem);
     }
 

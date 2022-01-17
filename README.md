@@ -20,9 +20,7 @@ seems more convenient to track them in a way like this.
 
  User Stories
 - As a user, I want to be able to add memories to collections
-- As a user, I want to be able to remove memories from collections
 - As a user, I want to be able to view the memories in a certain collection
-- As a user, I want to be able to count the number of memories in a collection
 - As a user, I want to be able to save my collections to file
 - As a user, I want to be able to load my collections from file
 
@@ -34,6 +32,3 @@ Memory added to Collection.
 - Fri Nov 26 14:42:24 PST 2021
 Collection saved
 
-## Phase 4: Task 3
- - The collection class that I designed looks to be redundant so I'd get rid of that class and just use lists or sets of memories instead.
- - There are a lot of nested classes in the GUI class, I would separate those into their own classes to clean up and better organize the code.
